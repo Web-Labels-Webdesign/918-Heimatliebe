@@ -1,0 +1,63 @@
+{% sw_extends '@Storefront/storefront/layout/footer/footer.html.twig' %}
+
+{% block layout_footer_navigation_hotline_content %}
+  <div id="collapseFooterHotline" class="footer-column-content collapse js-footer-column-content footer-contact" aria-labelledby="collapseFooterHotlineTitle">
+    <div class="footer-column-content-inner">
+      <p class="footer-contact-hotline">{{ 'footer.serviceHotline'|trans|sw_sanitize }}</p>
+    </div>
+  </div>
+{% endblock %}
+
+{% block layout_footer_navigation_columns %}
+  {{ parent() }}
+  <div class="col-md-4 footer-column js-footer-column">
+    <div class="footer-column-headline footer-headline js-collapse-footer-column-trigger" data-target="#collapseFooterPayment" aria-expanded="true" aria-controls="collapseFooterPayment">
+      {{ 'wlcustom.footer.paymentHead'|trans }}
+      <div class="footer-column-toggle">
+        <span class="footer-plus-icon">{% sw_icon 'plus' %}</span>
+        <span class="footer-minus-icon">{% sw_icon 'minus' %}</span>
+      </div>
+    </div>
+    <div id="collapseFooterPayment" class="footer-column-content collapse js-footer-column-content footer-contact" aria-labelledby="collapseFooterPaymentTitle">
+      <div class="footer-column-content-inner">
+        {% set paymentArray = [] %}
+        {% set paymentArrayName = [] %}
+        {% for paymentMethod in page.salesChannelPaymentMethods %}
+          {% if paymentMethod.media %}
+            {% if not (paymentMethod.media.id in paymentArray) %}
+              {% set paymentArray = paymentArray|merge([paymentMethod.media.id]) %}
+              {% sw_thumbnails 'footer-payment-image-thumbnails' with { media: paymentMethod.media, sizes: { default: '100px' }, attributes: { class: 'img-fluid footer-logo-image', alt: paymentMethod.media.translated.alt ? : paymentMethod.translated.name, title: paymentMethod.media.translated.title ? : paymentMethod.translated.name } } %}
+            {% endif %}
+          {% else %}
+            {% if paymentMethod.name not in paymentArrayName %}
+              {% set paymentArrayName = paymentArrayName|merge([paymentMethod.name]) %}
+              <span title="{{ paymentMethod.name }}">{{ paymentMethod.name }}</span>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 footer-column js-footer-column">
+    <div class="footer-column-headline footer-headline js-collapse-footer-column-trigger" data-target="#collapseFooterNewsletter" aria-expanded="true" aria-controls="collapseFooterNewsletter">
+      {{ 'footer.newsletterHeadline'|trans }}
+      <div class="footer-column-toggle">
+        <span class="footer-plus-icon">{% sw_icon 'plus' %}</span>
+        <span class="footer-minus-icon">{% sw_icon 'minus' %}</span>
+      </div>
+    </div>
+    <div id="collapseFooterNewsletter" class="footer-column-content collapse js-footer-column-content footer-contact" aria-labelledby="collapseFooterNewsletterTitle">
+      <div class="footer-column-content-inner">
+        <a class="btn btn-primary" data-ajax-modal="true" data-toggle="modal" href="/widgets/cms/018c156fc12270ae80d9bd22dc7b61d3" data-url="/widgets/cms/018c156fc12270ae80d9bd22dc7b61d3" title="{{ 'wlcustom.newsletter.register'|trans }}">{{ 'wlcustom.newsletter.register'|trans }}</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block layout_footer_payment_shipping_logos %}
+
+{% endblock %}
+
+{% block layout_footer_copyright %}
+
+{% endblock %}

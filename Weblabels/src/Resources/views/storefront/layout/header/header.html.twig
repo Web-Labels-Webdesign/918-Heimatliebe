@@ -1,0 +1,16 @@
+{% sw_extends '@Storefront/storefront/layout/header/header.html.twig' %}
+
+{% block layout_header_search %}
+  <div class="col-12 order-2 col-sm order-sm-1 header-search-col">
+    <div class="nav-main">
+      {% sw_include '@Storefront/storefront/layout/navigation/navigation.html.twig' %}
+    </div>
+  </div>
+{% endblock %}
+
+{% block layout_header_search_toggle %}
+  {{ parent() }}
+  <div class="custom-toggle-search">
+    {% sw_include '@Storefront/storefront/layout/header/search.html.twig' %}
+  </div>
+{% endblock %}

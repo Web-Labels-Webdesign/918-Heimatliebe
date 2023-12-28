@@ -1,0 +1,36 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% block base_header %}
+  {% set topbarArray = [] %}
+  {% if context.salesChannel.customFields.custom_sales_topbar_1 %}
+    {% set topbarArray = topbarArray|merge([context.salesChannel.customFields.custom_sales_topbar_1]) %}
+  {% endif %}
+  {% if context.salesChannel.customFields.custom_sales_topbar_2 %}
+    {% set topbarArray = topbarArray|merge([context.salesChannel.customFields.custom_sales_topbar_2]) %}
+  {% endif %}
+  {% if context.salesChannel.customFields.custom_sales_topbar_3 %}
+    {% set topbarArray = topbarArray|merge([context.salesChannel.customFields.custom_sales_topbar_3]) %}
+  {% endif %}
+  {% if context.salesChannel.customFields.custom_sales_topbar_4 %}
+    {% set topbarArray = topbarArray|merge([context.salesChannel.customFields.custom_sales_topbar_4]) %}
+  {% endif %}
+  {% if context.salesChannel.customFields.custom_sales_topbar_5 %}
+    {% set topbarArray = topbarArray|merge([context.salesChannel.customFields.custom_sales_topbar_5]) %}
+  {% endif %}
+  {% if (topbarArray|length) > 0 %}
+    <div class="custom-topbar">
+      <div class="container">
+        <div class="top-bar-container">
+          {% for item in topbarArray %}
+            <div class="top-bar-content">{{ item|trans|raw }}</div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  {{ parent() }}
+{% endblock %}
+
+{% block base_navigation %}
+
+{% endblock %}
