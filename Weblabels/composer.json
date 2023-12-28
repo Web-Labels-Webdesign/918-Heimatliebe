@@ -1,0 +1,18 @@
+{
+  "name": "swag/theme-skeleton",
+  "description": "Theme skeleton plugin",
+  "type": "shopware-platform-plugin",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Weblabels\\": "src/"
+    }
+  },
+  "extra": {
+    "shopware-plugin-class": "Weblabels\\Weblabels",
+    "label": {
+      "de-DE": "Theme Weblabels plugin",
+      "en-GB": "Theme Weblabels plugin"
+    }
+  }
+}
