@@ -1,0 +1,19 @@
+.footer-main {
+    border: none;
+    .footer-columns {
+        border-top: 1px solid $sw-color-brand-primary;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+    .footer-column { 
+        padding: 0;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .footer-main {
+        .footer-column {
+            width: calc(100% / 6);
+        }
+    }
+}

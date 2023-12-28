@@ -1,0 +1,22 @@
+{% sw_extends '@Storefront/storefront/layout/header/actions/cart-widget.html.twig' %}
+
+{% block layout_header_actions_cart_widget %}
+  <span class="header-cart-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="21.395" height="28.522" viewBox="0 0 21.395 28.522">
+      <g id="bag" transform="translate(-63.969 0)">
+        <g id="object_4_" transform="translate(63.969 0)">
+          <g id="Gruppe_3668" data-name="Gruppe 3668" transform="translate(0 0)">
+            <path id="Pfad_2863" data-name="Pfad 2863" d="M82,7.127H80.719v-1.1a6.021,6.021,0,0,0-12.042,0V7.127H67.338A3.373,3.373,0,0,0,63.969,10.5V21.834a6.7,6.7,0,0,0,6.688,6.688h8.019a6.7,6.7,0,0,0,6.688-6.688V10.5A3.373,3.373,0,0,0,82,7.127Zm-11.352-1.1a4.054,4.054,0,0,1,8.109,0V7.127H70.644ZM83.4,21.834a4.727,4.727,0,0,1-4.722,4.722H70.657a4.727,4.727,0,0,1-4.722-4.722V10.5a1.4,1.4,0,0,1,1.4-1.4H82a1.4,1.4,0,0,1,1.4,1.4Z" transform="translate(-63.969 0)" />
+          </g>
+          <g id="Gruppe_3669" data-name="Gruppe 3669" transform="translate(4.709 10.721)">
+            <path id="Pfad_2864" data-name="Pfad 2864" d="M159.554,192.465a.983.983,0,0,0-.983.983v2.088a4.054,4.054,0,0,1-8.109,0v-2.088a.983.983,0,1,0-1.966,0v2.088a6.021,6.021,0,0,0,12.042,0v-2.088A.983.983,0,0,0,159.554,192.465Z" transform="translate(-148.496 -192.465)" />
+          </g>
+        </g>
+      </g>
+    </svg>
+  </span>
+  {% if (page.cart.lineItems|length) > 0 %}
+    <span class="badge bg-primary header-cart-badge">{{ page.cart.lineItems|length }}</span>
+    <span class="header-cart-total">{{ page.cart.lineItems|length }} {{ 'wlcustom.article'|trans }}</span>
+  {% endif %}
+{% endblock %}

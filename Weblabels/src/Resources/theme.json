@@ -9,10 +9,13 @@
   "style": [
     "app/storefront/src/scss/overrides.scss",
     "@Storefront",
+    "app/storefront/src/slick/slick.scss",
     "app/storefront/src/scss/base.scss"
   ],
   "script": [
     "@Storefront",
+    "app/storefront/src/slick/slick.min.js",
+    "app/storefront/src/main.js",
     "app/storefront/dist/storefront/js/weblabels.js"
   ],
   "asset": [
