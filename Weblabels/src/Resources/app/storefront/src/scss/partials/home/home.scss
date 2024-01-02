@@ -1,0 +1,15 @@
+.moorl-listing-item-image {
+    .manufacuter-bg-image {
+        position: absolute;
+        z-index: -1;
+    }
+    .manufacturer-logo-img {
+        position: absolute;
+        bottom: 20px;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.8);
+        width: 100%;
+        max-width: 130px;
+        height: 80px;
+    }
+}
