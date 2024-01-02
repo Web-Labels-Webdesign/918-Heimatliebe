@@ -1,0 +1,13 @@
+{% sw_extends '@Storefront/plugin/moorl-foundation/listing-item.html.twig' %}
+
+{% block moorl_listing_item_image %}
+  {% if item.customfields.custom_manufacturer_img_url %}
+    {% set mediaID = item.customfields.custom_manufacturer_img_url %}
+    {% set mediaCollection = searchMedia([mediaID], context.context) %}
+    {% set propertyMedia = mediaCollection.get(mediaID).url %}
+    <div class="manufacturer-logo-img">{{ parent() }}</div>
+    <img class="manufacuter-bg-image" src="{{ propertyMedia }}" />
+  {% else %}
+    {{ parent() }}
+  {% endif %}
+{% endblock %}

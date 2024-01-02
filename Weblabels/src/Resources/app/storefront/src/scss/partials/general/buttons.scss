@@ -1,0 +1,14 @@
+.btn-primary {
+    &:hover {
+        background: $sw-color-brand-secondary;
+    }
+}
+.btn-secondary {
+    color: $sw-color-brand-primary;
+    border-color: $sw-color-brand-primary;
+    background: transparent;
+    &:hover {
+        color: $light-gray;
+        border-color: $light-gray;
+    }
+}

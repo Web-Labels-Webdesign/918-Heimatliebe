@@ -1,39 +1,65 @@
 {% sw_extends '@Storefront/storefront/layout/navigation/flyout.html.twig' %}
 
-{% block layout_navigation_flyout_bar_category_link_text %}
-  {{ name }} {{ 'general.categories'|trans }}
+{% block layout_navigation_flyout_bar %}
+
 {% endblock %}
 
 {% block layout_navigation_flyout_categories %}
-  {#
-  {% set kachels = [] %}
+  {% set maxKachelCount = 3 %}
+  {% set validKachelCount = 0 %}
 
-  {% for i in 1..3 %}
+  {% for i in 1..maxKachelCount %}
     {% set nameField = 'custom_category_dropdown_name' ~ i %}
     {% set linkField = 'custom_category_dropdown_link' ~ i %}
     {% set imgField = 'custom_category_dropdown_img' ~ i %}
-    {% set navigationImgField = 'custom_category_navigation_img' ~ i %}
 
     {% if category.customFields[nameField] and category.customFields[linkField] and category.customFields[imgField] %}
-      {% set mediaID = category.customFields[navigationImgField] %}
-      {% set mediaCollection = searchMedia([mediaID], context.context) %}
-      {% set propertyMedia = mediaCollection.get(mediaID).url %}
-
-      {% set kachel = { name: category.customFields[nameField], url: category.customFields[linkField], media: propertyMedia, active: true } %}
-      {% set kachels = kachels|merge([kachel]) %}
+      {% set validKachelCount = validKachelCount + 1 %}
     {% endif %}
   {% endfor %}
-#}
-  {{ parent() }}
-  {% if kachel1 or kachel2 or kachel3 %}
-    <div class="custom-dropdown-box">
-      <div class="cusotm-box">
-        <a href="{{ kachel1.url }}" title="{{ kachel1.name }}">
-          <img src="{{ kachel1.media }}" />
-          <div>{{ kachel1.name }}</div>
-        </a>
+
+  {% set kachels = [] %}
+  {% for i in 1..validKachelCount %}
+    {% set nameField = 'custom_category_dropdown_name' ~ i %}
+    {% set linkField = 'custom_category_dropdown_link' ~ i %}
+    {% set imgField = 'custom_category_dropdown_img' ~ i %}
+
+    {% if category.customFields[nameField] and category.customFields[linkField] and category.customFields[imgField] %}
+      {% set mediaID = category.customFields[imgField] %}
+      {% if mediaID %}
+        {% set mediaCollection = searchMedia([mediaID], context.context) %}
+        {% set propertyMedia = mediaCollection.get(mediaID).url %}
+        {% set kachel = { name: category.customFields[nameField], url: category.customFields[linkField], media: propertyMedia, active: true } %}
+        {% set kachels = kachels|merge([kachel]) %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+
+  {% if (kachels|length) > 0 %}
+    <div class="drop-with-kachel row">
+      <div class="col-6">
+        <div class="navigation-flyout-category-link">
+          <a class="nav-link" href="{{ seoUrl('frontend.navigation.page', { navigationId: category.id }) }}" itemprop="url" title="{{ name }}">{{ name }} {{ 'general.categories'|trans }}</a>
+        </div>{{ parent() }}
+      </div>
+      <div class="kachel-container col-6">
+        <div class="row justify-content-end">
+          {% for x in kachels %}
+            <div class="kachel col-4">
+              <a href="{{ x.url }}" title="{{ x.name }}">
+                <img src="{{ x.media }}" />
+                <span>{{ x.name }}</span>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
       </div>
     </div>
+  {% else %}
+    <div class="navigation-flyout-category-link">
+      <a class="nav-link" href="{{ seoUrl('frontend.navigation.page', { navigationId: category.id }) }}" itemprop="url" title="{{ name }}">{{ name }} {{ 'general.categories'|trans }}</a>
+    </div>
+    {{ parent() }}
   {% endif %}
 {% endblock %}
 
