@@ -1,0 +1,86 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/buy-widget.html.twig' %}
+
+{% block page_product_detail_buy_container %}
+  <div class="detail-manufacturer-name">{{ page.product.manufacturer.name }}</div>
+  <h1 class="product-detail-name" itemprop="name">{{ page.product.translated.name }}</h1>
+  {{ parent() }}
+  <div class="detail-payments">
+    {% set paymentArray = [] %}
+    {% set paymentArrayName = [] %}
+    {% for paymentMethod in page.salesChannelPaymentMethods %}
+      {% if paymentMethod.media %}
+        {% if not (paymentMethod.media.id in paymentArray) %}
+          {% set paymentArray = paymentArray|merge([paymentMethod.media.id]) %}
+          {% sw_thumbnails 'footer-payment-image-thumbnails' with { media: paymentMethod.media, sizes: { default: '100px' }, attributes: { class: 'img-fluid footer-logo-image', alt: paymentMethod.media.translated.alt ? : paymentMethod.translated.name, title: paymentMethod.media.translated.title ? : paymentMethod.translated.name } } %}
+        {% endif %}
+      {% else %}
+        {% if paymentMethod.name not in paymentArrayName %}
+          {% set paymentArrayName = paymentArrayName|merge([paymentMethod.name]) %}
+          <span title="{{ paymentMethod.name }}">{{ paymentMethod.name }}</span>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </div>
+  <div class="detail-custom-actions">
+    {% if config('core.cart.wishlistEnabled') %}
+      <div class="detail-action">
+        <span>{{ 'wlcustom.addwishlist'|trans }}</span>
+        {% sw_include '@Storefront/storefront/component/product/card/wishlist.html.twig' with { showText: false, size: 'md', productId: page.product.id } %}
+      </div>
+    {% endif %}
+    <div class="detail-action">
+      <span>{{ 'wlcustom.share'|trans }}</span>
+      <a href="https://wa.me/49123456789" title="WhatsApp"></a>
+      <a href="mailto:info@heimatliebe-onlineshop.de" title="Mail">{% sw_icon 'envelope' %}</a>
+    </div>
+  </div>
+{% endblock %}
+
+{% block page_product_detail_wishlist %}
+
+{% endblock %}
+
+{% block page_product_detail_ordernumber_container %}
+  <div class="detail-tabs-accordeon accordion accordion-flush">
+    {% if (page.product.translated.description|length) > 0 %}
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">{{ 'detail.descriptionTitle'|trans|sw_sanitize }}</button>
+        </div>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+          <div class="accordion-body">{{ page.product.translated.description|raw }}</div>
+        </div>
+      </div>
+    {% endif %}
+    {% if page.product.customFields.custom_product_additional_material %}
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">{{ 'wlcustom.materialpflege'|trans|sw_sanitize }}</button>
+        </div>
+        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
+          <div class="accordion-body">{{ page.product.customFields.custom_product_additional_material|raw }}</div>
+        </div>
+      </div>
+    {% endif %}
+    {% if page.product.customFields.custom_product_additional_size %}
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">{{ 'wlcustom.sizefit'|trans|sw_sanitize }}</button>
+        </div>
+        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree">
+          <div class="accordion-body">{{ page.product.customFields.custom_product_additional_size|raw }}</div>
+        </div>
+      </div>
+    {% endif %}
+    {% if page.product.customFields.custom_product_additional_shipping %}
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">{{ 'wlcustom.shippingreturn'|trans|sw_sanitize }}</button>
+        </div>
+        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour">
+          <div class="accordion-body">{{ page.product.customFields.custom_product_additional_shipping|raw }}</div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}
