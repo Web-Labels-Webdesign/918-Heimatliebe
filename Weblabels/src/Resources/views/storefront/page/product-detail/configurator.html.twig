@@ -1,0 +1,12 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/configurator.html.twig' %}
+
+{% block page_product_detail_configurator_group_title_text %}
+  {% if group.customFields.custom_property_custom_text_num_check %}
+    {{ group.options.elements|length }}
+  {% endif %}
+  {% if group.customFields.custom_property_custom_text_text %}
+    {{ group.customFields.custom_property_custom_text_text }}
+  {% else %}
+    {{ parent() }}
+  {% endif %}
+{% endblock %}
