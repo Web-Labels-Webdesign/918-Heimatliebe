@@ -1,14 +1,35 @@
+.btn {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    font-weight: 400;
+}
 .btn-primary {
     &:hover {
         background: $sw-color-brand-secondary;
+        border-color: $sw-color-brand-secondary;
     }
+    &:focus {
+        background: transparent;
+        color: $sw-color-brand-primary
+    }
+    text-transform: uppercase;
 }
 .btn-secondary {
     color: $sw-color-brand-primary;
     border-color: $sw-color-brand-primary;
     background: transparent;
+    text-transform: uppercase;
     &:hover {
         color: $light-gray;
         border-color: $light-gray;
+        background: transparent;
     }
+    &:focus {
+        background: $sw-color-brand-primary;
+        border-color: $sw-color-brand-primary;
+        color: #fff;
+    }
+}
+.btn.btn-custom {
+    line-height: 24px;
 }

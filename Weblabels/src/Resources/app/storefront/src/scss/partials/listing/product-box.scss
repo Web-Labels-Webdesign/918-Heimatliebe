@@ -4,6 +4,7 @@
         @media screen and (min-width: 992px) {
             .product-image-wrapper {
                 height: 590px;
+                margin-bottom: 0;
                 .product-image {
                     max-height: 590px;
                     height: 100%;
@@ -16,16 +17,26 @@
         .product-image {
             transform: scale(1.05);
         }
+        @media screen and (min-width: 992px) {
+            .product-info {
+                .maxia-listing-variants:first-child {
+                    transform: translateY(-100%);
+                    opacity: 1;
+                }
+            }
+        }
     }
     .card-body {
         padding: 0;
     }
     .product-box-manufacturer {
+        margin-top: 15px;
         margin-bottom: 5px;
+        font-size: 15px;
     }
     .product-name {
         font-weight: 400;
-        font-size: 14px;
+        font-size: 15px;
         line-clamp: 1;
         height: 22px;
         margin-bottom: 5px;
@@ -33,21 +44,80 @@
     .product-price-info {
         margin: 0;
         .product-price-wrapper {
-            font-size: 16px;
+            font-size: 15px;
             .product-price {
-                font-size: 16px;
+                font-size: 15px;
                 font-weight: 400;
             }
         }
     }
     .product-image-wrapper {
         overflow: hidden;
+        
         .product-image {
             transition: 500ms;
+            object-fit: contain;
         }
     }
     .product-info {
         padding: 0 10px;
+        position: relative;
+        z-index: 1;
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: #fff;
+            z-index: -1;
+        }
+        @media screen and (min-width: 992px) {
+            .maxia-listing-variants:first-child {
+                position: absolute;
+                width: 100%;
+                background: rgba(250,250,250,.5);
+                transition: 500ms;
+                opacity: 0;
+                z-index: -1;
+            }
+        }
+        .maxia-listing-variants {
+            &:first-child { 
+                background: rgba(250,250,250,.7);
+                transform: translatey(0%);
+                padding: 10px;
+                margin: 0 -10px;
+            }
+            .product-detail-configurator-options {
+                gap: 8px;
+                a {
+                    margin: 0;
+                }
+            }
+            .product-detail-configurator-option-label  {
+                background: transparent;
+                border: none;
+                justify-content: start;
+                &.is-display-color {
+                    outline: none;
+                    border: none;
+                    height: 16px;
+                    min-width: 16px;
+                }
+                &.is-display-media {
+                    outline: none;
+                    border: none;
+                    height: 16px;
+                    min-width: 16px;
+                    img {
+                        border-radius: 100%;
+                    }
+                }
+            }
+        }
     }
     .product-wishlist-action-circle {
         bottom: unset;
