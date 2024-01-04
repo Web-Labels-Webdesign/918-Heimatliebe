@@ -55,9 +55,21 @@
         gap: 10px 20px;
         flex-wrap: wrap;
         justify-content: center;
+        width: 100%;
     }
 }
-
+.cms-element-product-slider {
+    .cms-element-title-paragraph {
+        font-size: 26px;
+        font-weight: 400;
+    }
+}
+.pagination {
+    justify-content: center;
+    .page-link.disabled, .disabled > .page-link {
+        background-color: $light-gray;
+    }
+}
 @media screen and (min-width: 992px) {
     .cms-block-sidebar-filter {
         max-width: calc(100% - 260px);

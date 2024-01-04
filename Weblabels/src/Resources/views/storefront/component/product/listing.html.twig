@@ -1,0 +1,20 @@
+{% sw_extends '@Storefront/storefront/component/product/listing.html.twig' %}
+
+{% block element_product_listing_pagination_nav_top %}
+
+{% endblock %}
+
+{% block element_product_listing_col %}
+  {% for product in searchResult %}
+    {% if loop.index == 15 or loop.index == 1 %}
+      <div class="cms-listing-col {{ listingColumns }}">My box1</div>
+    {% elseif loop.index == 6 %}
+      <div class="cms-listing-col {{ listingColumns }}">My box2</div>
+    {% endif %}
+    <div class="cms-listing-col {{ listingColumns }}">
+      {% block element_product_listing_box %}
+        {% sw_include '@Storefront/storefront/component/product/card/box.html.twig' with { layout: boxLayout, displayMode: displayMode } %}
+      {% endblock %}
+    </div>
+  {% endfor %}
+{% endblock %}
