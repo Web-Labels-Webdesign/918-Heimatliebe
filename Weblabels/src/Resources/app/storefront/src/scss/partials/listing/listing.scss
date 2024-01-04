@@ -37,6 +37,27 @@
         
     }
 }
+.category-banner {
+    position: relative;
+    &.with-img {
+        min-height: 480px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        .cat-buttons {
+            padding: 30px 20px;
+            align-self: end;
+        }
+    }
+    .cat-buttons {
+        display: flex;
+        gap: 10px 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
 @media screen and (min-width: 992px) {
     .cms-block-sidebar-filter {
         max-width: calc(100% - 260px);
