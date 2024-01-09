@@ -18,7 +18,16 @@
                 order: 1;
                 display: flex;
                 flex-wrap: wrap;
-                justify-content: center;
+                .left-top {
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+                .left-bottom {
+                    width: 100%;
+                    .cms-image-container {
+                        align-self: end;
+                    }
+                }
             } 
         }
     }
@@ -30,6 +39,19 @@
         justify-content: center!important;
         .cms-image-container {
             width: 100%;
+        }
+    }
+}
+.is-act-home {
+    .category-banner.with-img {
+        min-height: 570px;
+    }
+}
+.p-5 {
+    .cms-block-container-row {
+        margin: 0 -5px;
+        .col-md-4 {
+            padding: 0 5px;
         }
     }
 }
