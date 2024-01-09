@@ -20,21 +20,23 @@
     </div>
     <div id="collapseFooterPayment" class="footer-column-content collapse js-footer-column-content footer-contact" aria-labelledby="collapseFooterPaymentTitle">
       <div class="footer-column-content-inner">
-        {% set paymentArray = [] %}
-        {% set paymentArrayName = [] %}
-        {% for paymentMethod in page.salesChannelPaymentMethods %}
-          {% if paymentMethod.media %}
-            {% if not (paymentMethod.media.id in paymentArray) %}
-              {% set paymentArray = paymentArray|merge([paymentMethod.media.id]) %}
-              {% sw_thumbnails 'footer-payment-image-thumbnails' with { media: paymentMethod.media, sizes: { default: '100px' }, attributes: { class: 'img-fluid footer-logo-image', alt: paymentMethod.media.translated.alt ? : paymentMethod.translated.name, title: paymentMethod.media.translated.title ? : paymentMethod.translated.name } } %}
+        <div class="custom-payments">
+          {% set paymentArray = [] %}
+          {% set paymentArrayName = [] %}
+          {% for paymentMethod in page.salesChannelPaymentMethods %}
+            {% if paymentMethod.media %}
+              {% if not (paymentMethod.media.id in paymentArray) %}
+                {% set paymentArray = paymentArray|merge([paymentMethod.media.id]) %}
+                {% sw_thumbnails 'footer-payment-image-thumbnails' with { media: paymentMethod.media, sizes: { default: '100px' }, attributes: { class: 'img-fluid footer-logo-image', alt: paymentMethod.media.translated.alt ? : paymentMethod.translated.name, title: paymentMethod.media.translated.title ? : paymentMethod.translated.name } } %}
+              {% endif %}
+            {% else %}
+              {% if paymentMethod.name not in paymentArrayName %}
+                {% set paymentArrayName = paymentArrayName|merge([paymentMethod.name]) %}
+                <span title="{{ paymentMethod.name }}">{{ paymentMethod.name }}</span>
+              {% endif %}
             {% endif %}
-          {% else %}
-            {% if paymentMethod.name not in paymentArrayName %}
-              {% set paymentArrayName = paymentArrayName|merge([paymentMethod.name]) %}
-              <span title="{{ paymentMethod.name }}">{{ paymentMethod.name }}</span>
-            {% endif %}
-          {% endif %}
-        {% endfor %}
+          {% endfor %}
+        </div>
       </div>
     </div>
   </div>

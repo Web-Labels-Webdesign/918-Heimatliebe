@@ -50,9 +50,26 @@
     }
     .accordion-item {
         border-bottom: unset;
-        border-top: 1px solid $light-gray!important;
+        border-top: 1px solid $super-light-gray!important;
         &:last-of-type {
-            border-bottom: 1px solid $light-gray;
+            border-bottom: 1px solid $super-light-gray;
+        }
+    }
+}
+.detail-custom-actions {
+    margin-top: 40px;
+    display: flex;
+    gap: 10px 20px;
+    .detail-action {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+    svg {
+        transition: 300ms;
+        &:hover {
+            color: $sw-text-color;
         }
     }
 }
